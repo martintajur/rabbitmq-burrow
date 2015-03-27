@@ -4,10 +4,14 @@ var cluster = require('cluster'),
 
 if (cluster.isMaster) {
 
+	if (!process.env.WORKERS) {
+		throw new Error('WORKERS env variable must be set (to number of workers to fork)');
+	}
+
 	var workers = [],
 		exited = 0;
 
-	_.each(_.range(4), function() {
+	_.each(_.range(parseInt(process.env.WORKERS, 10)), function() {
 		var w = cluster.fork();
 		w.on('exit', function() {
 			exited++;
