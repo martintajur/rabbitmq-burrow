@@ -89,7 +89,7 @@ else {
 					}
 					if (debug) console.log(process.pid + ' ::: ' + 'ready '+ready);
 					// Use the default 'amq.topic' exchange
-					connections[r].queue('my-queue-'+r, { autoDelete: true, durable: false }, function (q) {
+					connections[r].queue('my-queue-'+process.pid+'-'+r, { autoDelete: true, durable: false }, function (q) {
 						if (debug) console.log(process.pid + ' ::: ' + 'queue declared ' + r);
 						// Catch all messages
 						q.bind(exchange, 'rabbit.#', function() {
