@@ -99,17 +99,17 @@ else {
 								if (debug) console.log(process.pid + ' ::: ' + 'second binding done ' + r);
 
 								// Receive messages
-								q.subscribe(function (message) {
+								//q.subscribe(function (message) {
 									// do nothing
 
-								}).addCallback(function(ok) {
+								//}).addCallback(function(ok) {
 									if (debug) console.log(process.pid + ' ::: ' + 'subscribed ' + r);
 									done++;
 									if (done == total) {
 										timeStats.done = (new Date().getTime() - startTime) / 1000;
 										terminate();
 									}
-								});
+								//});
 
 							});
 						});
