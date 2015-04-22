@@ -100,8 +100,8 @@ else {
 
 								// Receive messages
 								q.subscribe(function (message) {
-									// Print messages to stdout
-									console.log(process.pid + ' ::: ' + message);
+									// do nothing
+									
 								}).addCallback(function(ok) {
 									if (debug) console.log(process.pid + ' ::: ' + 'subscribed ' + r);
 									done++;
