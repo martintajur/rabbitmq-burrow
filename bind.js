@@ -92,16 +92,16 @@ else {
 					connections[r].queue('my-queue-'+process.pid+'-'+r, { autoDelete: true, durable: false }, function (q) {
 						if (debug) console.log(process.pid + ' ::: ' + 'queue declared ' + r);
 						// Catch all messages
-						q.bind(exchange, 'rabbit.#', function() {
+						q.bind(exchange, 'rabbit.*', function() {
 							if (debug) console.log(process.pid + ' ::: ' + 'first binding done ' + r);
-							q.bind(exchange, 'bunny.#', function() {
+							q.bind(exchange, 'bunny.*', function() {
 
 								if (debug) console.log(process.pid + ' ::: ' + 'second binding done ' + r);
 
 								// Receive messages
 								q.subscribe(function (message) {
 									// do nothing
-									
+
 								}).addCallback(function(ok) {
 									if (debug) console.log(process.pid + ' ::: ' + 'subscribed ' + r);
 									done++;
