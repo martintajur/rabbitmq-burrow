@@ -38,6 +38,7 @@ _.each(_.range(total), function(r) {
 });
 
 var terminate = function() {
+	var i = 0;
 	setTimeout(function() {
 		process.exit(130);
 	}, 5000);
@@ -46,6 +47,13 @@ var terminate = function() {
 		console.log('Publishing interval ' + p + ' cleared');
 	});
 	_.each(connections, function(c, i) {
+		c.on('close', function() {
+			i++;
+			if (i == total) {
+				console.log('Clean shutdown! Yay!');
+				process.exit(0);
+			}
+		})
 		c.disconnect();
 		console.log('Connection ' + i + ' disconnect issued');
 	});
