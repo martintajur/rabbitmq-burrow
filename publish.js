@@ -26,7 +26,7 @@ _.each(_.range(total), function(r) {
 		publishers[r] = setInterval(function() {
 			if (debug) console.log(r + ' published');
 			exchange.publish('rabbit.testing', JSON.stringify({"test": new Date().toISOString(), "connection": r }), { contentType: 'application/json' });
-		}, 100);
+		}, 1000);
 	});
 
 	connections[r].on('error', function(err) {
